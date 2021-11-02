@@ -1,6 +1,5 @@
 package BoardLogic;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Board {
     private Space[][] board = new Space[9][9];
@@ -30,7 +29,7 @@ public class Board {
         return checkRow(toCheck) && checkCol(toCheck) && checkNinth(toCheck);
     }
 
-    private boolean checkNinth(@NotNull Space toCheck) throws Exception {
+    private boolean checkNinth( Space toCheck) throws Exception {
         return switch (toCheck.getNinth()) {
             case 1 -> ninthHelper(toCheck, 0, 0, 3, 3);
             case 2 -> ninthHelper(toCheck, 3, 0, 6, 3);
@@ -63,7 +62,7 @@ public class Board {
 
         return true;
     }
-    public boolean checkRow(@NotNull Space toCheck){
+    public boolean checkRow(Space toCheck){
 
         final int row = toCheck.getRow();
 
@@ -79,7 +78,7 @@ public class Board {
         return true;
     }
 
-    public boolean checkCol(@NotNull Space toCheck){
+    public boolean checkCol(Space toCheck){
         final int col = toCheck.getCol();
 
         for ( int row = 0; row < 9; row++){
@@ -92,6 +91,15 @@ public class Board {
         return true;
     }
 
+    public void convertFromGrid(int[] grid){
+        int gridIndex = 0;
+        for(int x = 0; x < 9; x++){
+            for(int y = 0; y < 9; y++){
+                board[x][y].setValue(grid[gridIndex]);
+                gridIndex++;
+            }
+        }
+    }
 
 
     @Override
