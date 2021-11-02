@@ -93,6 +93,7 @@ public class boardGeneration {
                 }
             }
         }
+        return new int[0];
     }
 
 }
