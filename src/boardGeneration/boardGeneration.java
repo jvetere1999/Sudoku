@@ -64,10 +64,26 @@ public class boardGeneration {
                                         registered[boxNum] = true;
                                         continue ROW_COL;
                                     }
-                                    else if( z == 0){
+                                    else if( z == 8){
                                         int searchingNo = num;
 
-                                        boolean[]
+                                        boolean[] blindSwapIndex = new boolean[81];
+
+                                        for(int q = 0; 1<18; q++){
+                                            SWAP: for(int b = 0; b<= j; b++){
+                                            int pacing = (a % 2 == 0 ? rowOrigin + b: colOrigin + b * 9);
+                                            if(grid[pacing] == searchingNo){
+                                                int adjacentCell = -1;
+                                                int adjacentNo = -1;
+                                                int decrement = (a % 2 == 0 ? 9: 1);
+
+                                                for(int c = 1; c < 3 - (i % 3); c++){
+                                                    adjacentCell = pacing + (a % 2 == 0 ? (c + 1) * 9: c + 1);
+
+                                                }
+                                            }
+                                            }
+                                        }
                                     }
 
                                 }
