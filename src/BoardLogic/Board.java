@@ -1,16 +1,17 @@
 package BoardLogic;
 
 
+import ServerSide.SudokuGridGenerator;
+
+import static ServerSide.SudokuGridGenerator.isPerfect;
+
 public class Board {
     private Space[][] board = new Space[9][9];
     private boolean valid = true;
 
     public Board() {
-        for (int col = 0; col < 9; col++) {
-            for (int row = 0; row < 9; row++) {
-                board[row] [col] = new Space(row, col, 0);
-            }
-        }
+       this.fillGrid();
+
     }
 
     public void setValue(int value, int row, int col){
@@ -62,7 +63,7 @@ public class Board {
 
         return true;
     }
-    public boolean checkRow(Space toCheck){
+    private boolean checkRow(Space toCheck){
 
         final int row = toCheck.getRow();
 
@@ -78,7 +79,7 @@ public class Board {
         return true;
     }
 
-    public boolean checkCol(Space toCheck){
+    private boolean checkCol(Space toCheck){
         final int col = toCheck.getCol();
 
         for ( int row = 0; row < 9; row++){
@@ -91,16 +92,25 @@ public class Board {
         return true;
     }
 
-    public void convertFromGrid(int[] grid){
-        int gridIndex = 0;
-        for(int x = 0; x < 9; x++){
-            for(int y = 0; y < 9; y++){
-                board[x][y].setValue(grid[gridIndex]);
-                gridIndex++;
+    private void fillGrid(){
+        SudokuGridGenerator sudoku = new SudokuGridGenerator();
+        int[] grid = sudoku.generateGrid();
+        if(isPerfect(grid)){
+            System.out.println("PERFECT GRID");
+            int gridIndex = 0;
+            for (int x = 0; x < 9; x++) {
+                for (int y = 0; y < 9; y++) {
+                    board[x][y].setValue(grid[gridIndex]);
+                    gridIndex++;
+                }
             }
         }
+        System.out.println(this);
     }
+    public void removeSpaces(char d){
 
+
+    }
 
     @Override
     public String toString(){
@@ -122,7 +132,6 @@ public class Board {
         return rtr;
     }
     public void debugger(int row, int col, int value) throws Exception {
-        System.out.println(this.checkIfValid(0,0));
     }
 
 }
